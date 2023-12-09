@@ -1,73 +1,72 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome import automation
-from esphome.components import climate, sensor
-from esphome.const import (
-    CONF_AUTO_MODE,
-    CONF_AWAY_CONFIG,
-    CONF_COOL_ACTION,
-    CONF_COOL_DEADBAND,
-    CONF_COOL_MODE,
-    CONF_COOL_OVERRUN,
-    CONF_DEFAULT_MODE,
-    CONF_DEFAULT_TARGET_TEMPERATURE_HIGH,
-    CONF_DEFAULT_TARGET_TEMPERATURE_LOW,
-    CONF_DRY_ACTION,
-    CONF_DRY_MODE,
-    CONF_FAN_MODE,
-    CONF_FAN_MODE_ON_ACTION,
-    CONF_FAN_MODE_OFF_ACTION,
-    CONF_FAN_MODE_AUTO_ACTION,
-    CONF_FAN_MODE_LOW_ACTION,
-    CONF_FAN_MODE_MEDIUM_ACTION,
-    CONF_FAN_MODE_HIGH_ACTION,
-    CONF_FAN_MODE_MIDDLE_ACTION,
-    CONF_FAN_MODE_FOCUS_ACTION,
-    CONF_FAN_MODE_DIFFUSE_ACTION,
-    CONF_FAN_MODE_QUIET_ACTION,
-    CONF_FAN_ONLY_ACTION,
-    CONF_FAN_ONLY_ACTION_USES_FAN_MODE_TIMER,
-    CONF_FAN_ONLY_COOLING,
-    CONF_FAN_ONLY_MODE,
-    CONF_FAN_WITH_COOLING,
-    CONF_FAN_WITH_HEATING,
-    CONF_HEAT_ACTION,
-    CONF_HEAT_DEADBAND,
-    CONF_HEAT_MODE,
-    CONF_HEAT_OVERRUN,
-    CONF_ID,
-    CONF_IDLE_ACTION,
-    CONF_MAX_COOLING_RUN_TIME,
-    CONF_MAX_HEATING_RUN_TIME,
-    CONF_MAX_TEMPERATURE,
-    CONF_MIN_COOLING_OFF_TIME,
-    CONF_MIN_COOLING_RUN_TIME,
-    CONF_MIN_FAN_MODE_SWITCHING_TIME,
-    CONF_MIN_FANNING_OFF_TIME,
-    CONF_MIN_FANNING_RUN_TIME,
-    CONF_MIN_HEATING_OFF_TIME,
-    CONF_MIN_HEATING_RUN_TIME,
-    CONF_MIN_IDLE_TIME,
-    CONF_MIN_TEMPERATURE,
-    CONF_NAME,
-    CONF_MODE,
-    CONF_OFF_MODE,
-    CONF_PRESET,
-    CONF_SENSOR,
-    CONF_SET_POINT_MINIMUM_DIFFERENTIAL,
-    CONF_STARTUP_DELAY,
-    CONF_SUPPLEMENTAL_COOLING_ACTION,
-    CONF_SUPPLEMENTAL_COOLING_DELTA,
-    CONF_SUPPLEMENTAL_HEATING_ACTION,
-    CONF_SUPPLEMENTAL_HEATING_DELTA,
-    CONF_SWING_BOTH_ACTION,
-    CONF_SWING_HORIZONTAL_ACTION,
-    CONF_SWING_MODE,
-    CONF_SWING_OFF_ACTION,
-    CONF_SWING_VERTICAL_ACTION,
-    CONF_TARGET_TEMPERATURE_CHANGE_ACTION,
-    CONF_VISUAL,
-)
+from esphome.components import climate
+from esphome.components import sensor
+from esphome.const import CONF_AUTO_MODE
+from esphome.const import CONF_AWAY_CONFIG
+from esphome.const import CONF_COOL_ACTION
+from esphome.const import CONF_COOL_DEADBAND
+from esphome.const import CONF_COOL_MODE
+from esphome.const import CONF_COOL_OVERRUN
+from esphome.const import CONF_DEFAULT_MODE
+from esphome.const import CONF_DEFAULT_TARGET_TEMPERATURE_HIGH
+from esphome.const import CONF_DEFAULT_TARGET_TEMPERATURE_LOW
+from esphome.const import CONF_DRY_ACTION
+from esphome.const import CONF_DRY_MODE
+from esphome.const import CONF_FAN_MODE
+from esphome.const import CONF_FAN_MODE_AUTO_ACTION
+from esphome.const import CONF_FAN_MODE_DIFFUSE_ACTION
+from esphome.const import CONF_FAN_MODE_FOCUS_ACTION
+from esphome.const import CONF_FAN_MODE_HIGH_ACTION
+from esphome.const import CONF_FAN_MODE_LOW_ACTION
+from esphome.const import CONF_FAN_MODE_MEDIUM_ACTION
+from esphome.const import CONF_FAN_MODE_MIDDLE_ACTION
+from esphome.const import CONF_FAN_MODE_OFF_ACTION
+from esphome.const import CONF_FAN_MODE_ON_ACTION
+from esphome.const import CONF_FAN_MODE_QUIET_ACTION
+from esphome.const import CONF_FAN_ONLY_ACTION
+from esphome.const import CONF_FAN_ONLY_ACTION_USES_FAN_MODE_TIMER
+from esphome.const import CONF_FAN_ONLY_COOLING
+from esphome.const import CONF_FAN_ONLY_MODE
+from esphome.const import CONF_FAN_WITH_COOLING
+from esphome.const import CONF_FAN_WITH_HEATING
+from esphome.const import CONF_HEAT_ACTION
+from esphome.const import CONF_HEAT_DEADBAND
+from esphome.const import CONF_HEAT_MODE
+from esphome.const import CONF_HEAT_OVERRUN
+from esphome.const import CONF_ID
+from esphome.const import CONF_IDLE_ACTION
+from esphome.const import CONF_MAX_COOLING_RUN_TIME
+from esphome.const import CONF_MAX_HEATING_RUN_TIME
+from esphome.const import CONF_MAX_TEMPERATURE
+from esphome.const import CONF_MIN_COOLING_OFF_TIME
+from esphome.const import CONF_MIN_COOLING_RUN_TIME
+from esphome.const import CONF_MIN_FAN_MODE_SWITCHING_TIME
+from esphome.const import CONF_MIN_FANNING_OFF_TIME
+from esphome.const import CONF_MIN_FANNING_RUN_TIME
+from esphome.const import CONF_MIN_HEATING_OFF_TIME
+from esphome.const import CONF_MIN_HEATING_RUN_TIME
+from esphome.const import CONF_MIN_IDLE_TIME
+from esphome.const import CONF_MIN_TEMPERATURE
+from esphome.const import CONF_MODE
+from esphome.const import CONF_NAME
+from esphome.const import CONF_OFF_MODE
+from esphome.const import CONF_PRESET
+from esphome.const import CONF_SENSOR
+from esphome.const import CONF_SET_POINT_MINIMUM_DIFFERENTIAL
+from esphome.const import CONF_STARTUP_DELAY
+from esphome.const import CONF_SUPPLEMENTAL_COOLING_ACTION
+from esphome.const import CONF_SUPPLEMENTAL_COOLING_DELTA
+from esphome.const import CONF_SUPPLEMENTAL_HEATING_ACTION
+from esphome.const import CONF_SUPPLEMENTAL_HEATING_DELTA
+from esphome.const import CONF_SWING_BOTH_ACTION
+from esphome.const import CONF_SWING_HORIZONTAL_ACTION
+from esphome.const import CONF_SWING_MODE
+from esphome.const import CONF_SWING_OFF_ACTION
+from esphome.const import CONF_SWING_VERTICAL_ACTION
+from esphome.const import CONF_TARGET_TEMPERATURE_CHANGE_ACTION
+from esphome.const import CONF_VISUAL
 
 CONF_PRESET_CHANGE = "preset_change"
 CONF_DEFAULT_PRESET = "default_preset"
@@ -647,8 +646,9 @@ async def to_code(config):
         CONF_COOL_ACTION in config
         or (config[CONF_FAN_ONLY_COOLING] and CONF_FAN_ONLY_ACTION in config)
     )
-    if two_points_available:
-        cg.add(var.set_supports_two_points(True))
+    # TODO(danieljy): Figure out if you can use config for this.
+    # if two_points_available:
+    #     cg.add(var.set_supports_two_points(True))
 
     sens = await cg.get_variable(config[CONF_SENSOR])
     cg.add(
@@ -733,10 +733,11 @@ async def to_code(config):
         var.get_idle_action_trigger(), [], config[CONF_IDLE_ACTION]
     )
 
-    if heat_cool_mode_available is True:
-        cg.add(var.set_supports_heat_cool(True))
-    else:
-        cg.add(var.set_supports_heat_cool(False))
+    # TODO(danieljy): Use config for this.
+    # if heat_cool_mode_available is True:
+    #     cg.add(var.set_supports_heat_cool(True))
+    # else:
+    cg.add(var.set_supports_heat_cool(False))
 
     if CONF_COOL_ACTION in config:
         await automation.build_automation(
